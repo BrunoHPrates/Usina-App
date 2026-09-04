@@ -1,4 +1,11 @@
 import 'package:flutter/material.dart';
+import 'cadastros/cadastro_indicador.dart';
+import 'cadastros/cadastro_equipamento.dart';
+import 'cadastros/cadastro_medicao.dart';
+import 'cadastros/cadastro_safra.dart';
+import 'cadastros/cadastro_tipo_informacao.dart';
+import 'cadastros/cadastro_unidade.dart';
+import 'cadastros/cadastro_unidade_de_medida.dart';
 
 class TelaPrincipal extends StatefulWidget {
 	const TelaPrincipal({super.key});
@@ -37,37 +44,58 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
 					},
 				),
 				if (cadastroAberto) ...[
-					const ListTile(
+					ListTile(
 						leading: Icon(Icons.chevron_right),
 						title: Text('Unidade'),
+						onTap: () => abrirCadastro(const CadastroUnidadePage()),
 					),
-					const ListTile(
-						leading: Icon(Icons.chevron_right),
-						title: Text('Setor'),
-					),
-					const ListTile(
+					ListTile(
 						leading: Icon(Icons.chevron_right),
 						title: Text('Equipamento'),
+						onTap: () => abrirCadastro(const CadastroEquipamentoPage()),
 					),
-					const ListTile(
+					ListTile(
+            leading: const Icon(Icons.chevron_right),
+            title: const Text('Indicador'),
+            onTap: () {
+              Navigator.pop(context);
+
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const CadastroIndicadorPage(),
+                ),
+              );
+            },
+          ),
+					ListTile(
 						leading: Icon(Icons.chevron_right),
-						title: Text('Indicador'),
+						title: Text('Safra'),
+						onTap: () => abrirCadastro(const CadastroSafraPage()),
 					),
-					const ListTile(
+					ListTile(
 						leading: Icon(Icons.chevron_right),
-						title: Text('Funcionário'),
+						title: Text('Tipo de Informação'),
+						onTap: () => abrirCadastro(const CadastroTipoInformacaoPage()),
 					),
-					const ListTile(
+					ListTile(
 						leading: Icon(Icons.chevron_right),
-						title: Text('Tipo de Medição'),
+						title: Text('Unidade de Medida'),
+						onTap: () => abrirCadastro(const CadastroUnidadeDeMedidaPage()),
 					),
-					const ListTile(
-						leading: Icon(Icons.chevron_right),
-						title: Text('Parâmetro'),
+					ListTile(
+						leading: const Icon(Icons.chevron_right),
+						title: const Text('Medição'),
+						onTap: () => abrirCadastro(const CadastroMedicaoPage()),
 					),
 				],
 			],
 		);
+	}
+
+	void abrirCadastro(Widget pagina) {
+		Navigator.pop(context);
+		Navigator.push(context, MaterialPageRoute(builder: (_) => pagina));
 	}
 
 	@override
@@ -85,3 +113,4 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
 		);
 	}
 }
+
